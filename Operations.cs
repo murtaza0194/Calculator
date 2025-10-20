@@ -224,6 +224,18 @@ public sealed class ExpOp : OpBase
     }
 }
 
+public sealed class NegOp : OpBase
+{
+    public override string Symbol => "neg";
+    public override int Arity => 1;
+    public override double Apply(params double[] args)
+    {
+        RequireExact(args, 1);
+        return -args[0];
+    }
+}
+
+
 public sealed class OpRegistry
 {
     private readonly Dictionary<string, IOperation> _map =
@@ -252,5 +264,6 @@ public sealed class OpRegistry
         .Register(new TanOp())
         .Register(new LnOp())
         .Register(new Log10Op())
-        .Register(new ExpOp());
+        .Register(new ExpOp())
+        .Register(new NegOp());
 }
